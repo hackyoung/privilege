@@ -53,7 +53,7 @@ class FilePrivilegeStorage implements PrivilegeStorage
     private static function defaultPathfile()
     {
         return base_path() . '/' . trim(env(
-            'PRIVILEGE_SAVE_PATHFILE', 'storage/app/privilege'
+            'PRIVILEGE_SAVE_PATHFILE', 'storage/app/privilege.json'
         ), '/');
     }
 }

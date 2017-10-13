@@ -18,7 +18,7 @@ class PrivilegeImp implements Privilege
 
     public function gather() : PrivilegeCollection
     {
-        return PrivilegeCollectionImp::newFromRoutes($this->getRoutes());
+        return app(PrivilegeCollection::class, [$this->getRoutes()]);
     }
 
     public function exists() : bool
@@ -46,7 +46,7 @@ class PrivilegeImp implements Privilege
             throw new \Exception('请先创建权限');
         }
 
-        return PrivilegeCollectionImp::newFromRoutes($this->storage->fetch());
+        return app(PrivilegeCollection::class, [$this->storage->fetch()]);
     }
 
     public function contain(string $privPoint, array $privCol) : bool

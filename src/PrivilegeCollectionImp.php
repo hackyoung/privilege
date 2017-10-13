@@ -5,9 +5,7 @@ class PrivilegeCollectionImp implements PrivilegeCollection
 {
     private $routes;
 
-    private static $instance;
-
-    private function __construct($routes)
+    public function __construct($routes)
     {
         $this->routes = $routes;
     }
@@ -82,14 +80,5 @@ class PrivilegeCollectionImp implements PrivilegeCollection
         }
 
         return implode('>', $result);
-    }
-
-    public static function newFromRoutes($routes)
-    {
-        if (!(self::$instance instanceof self)) {
-            self::$instance = new self($routes);
-        }
-
-        return self::$instance;
     }
 }

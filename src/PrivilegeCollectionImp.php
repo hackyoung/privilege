@@ -23,18 +23,18 @@ class PrivilegeCollectionImp implements PrivilegeCollection
         foreach ($this->routes as $route) {
             $route_names = explode('.', $route);
             $history_names = [];
-            $history_labels = [];
             foreach ($route_names as $route_name) {
                 $history_names[] = $route_name;
-                $history_labels[] = $this->label($route_name);
-                $result[] = [
-                    'name' => implode('.', $history_names),
-                    'label' => implode('>', $history_labels)
-                ];
+                $result[] = implode('.', $history_names);
             }
         }
 
-        return $result;
+        return array_map(function ($item) {
+            return [
+                'name' => $item,
+                'label' => $this->label($item)
+            ];
+        }, array_unique($result));
     }
 
     public function tree() : array
@@ -75,7 +75,13 @@ class PrivilegeCollectionImp implements PrivilegeCollection
 
     protected function label($route_name)
     {
-        return env(strtoupper($route_name), $route_name);
+        $route_names = explode('.', $route_name);
+        $result = [];
+        foreach ($route_names as $route) {
+            $result[] = env(strtoupper($route), $route) ?? $route;
+        }
+
+        return implode('>', $result);
     }
 
     public static function newFromRoutes($routes)

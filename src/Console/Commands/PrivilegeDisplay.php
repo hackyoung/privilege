@@ -6,7 +6,7 @@ use Ylara\Privilege;
 
 class PrivilegeDisplay extends Command
 {
-    protected $signature = 'privileges:display';
+    protected $signature = 'privileges:display {--tree} {--list}';
 
     protected $description = '列出目前系统收集并正在使用的权限';
 
@@ -22,6 +22,13 @@ class PrivilegeDisplay extends Command
     {
         $this->info('权限点及分组');
         $this->info('--------------------------------------------------------');
+        if ($this->option('list')) {
+            $privileges = $this->privilege->fetch()->flatten();
+            foreach ($privileges as $privilege) {
+                $this->info(sprintf("%s\t%s", $privilege['name'], $privilege['label']));
+            }
+            return;
+        }
         $privileges = $this->privilege->fetch()->tree();
         foreach ($privileges as $privilege) {
             $depth = 0;

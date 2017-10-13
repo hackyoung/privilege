@@ -1,7 +1,7 @@
 <?php
 namespace Ylara\Providers;
 
-interface PrivilegeServiceProvider
+interface Privilege
 {
     /**
      * 从Route收集权限

@@ -12,7 +12,12 @@ class PrivilegeCollectionImp implements PrivilegeCollection
         $this->routes = $routes;
     }
 
-    public function flatten()
+    public function unpack()
+    {
+        return $this->routes;
+    }
+
+    public function flatten() : array
     {
         $result = [];
         foreach ($this->routes as $route) {
@@ -32,7 +37,7 @@ class PrivilegeCollectionImp implements PrivilegeCollection
         return $result;
     }
 
-    public function tree()
+    public function tree() : array
     {
         $permissions = $this->routes;
         $result = [];

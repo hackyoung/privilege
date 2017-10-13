@@ -1,5 +1,5 @@
 <?php
-namespace Ylara\Providers;
+namespace Ylara;
 
 interface Privilege
 {
@@ -10,6 +10,10 @@ interface Privilege
      */
     public function gather() : PrivilegeCollection;
 
+    /**
+     * 判断是否已有收集到的权限
+     */
+    public function exists() : bool;
     /**
      * 将收集的权限存储到存储器
      *

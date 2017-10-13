@@ -29,6 +29,6 @@ class PrivilegeGatherer extends Command
         $privilege = $this->privilege->gather();
         $this->privilege->store($privilege);
 
-        $this->info('权限生成完成，可以使用privilege:list查看');
+        $this->info('权限生成完成，可以使用privilege:display查看');
     }
 }

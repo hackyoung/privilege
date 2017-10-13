@@ -16,9 +16,7 @@ class PrivilegeServiceProvider extends ServiceProvider
         $this->app->bind(Privilege::class, function () {
             return app(PrivilegeImp::class);
         });
-        $this->app->bind(PrivilegeCollection::class, function (array $routes) {
-            return new PrivilegeCollectionImp($routes);
-        });
+        $this->app->bind(PrivilegeCollection::class, PrivilegeCollectionImp::class);
         $this->app->bind(PrivilegeStorage::class, function () {
             return app(FilePrivilegeStorage::class);
         });

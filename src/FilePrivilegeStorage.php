@@ -1,7 +1,7 @@
 <?php
 namespace Ylara;
 
-class FilePrivilegeProvider implements PrivilegeStorage
+class FilePrivilegeStorage implements PrivilegeStorage
 {
     private $pathfile;
 
@@ -39,13 +39,15 @@ class FilePrivilegeProvider implements PrivilegeStorage
 
     public function save(array $privileges) : bool
     {
-        $dir = array_pop(explode('/', $this->pathfile));
+        $dir = explode('/', $this->pathfile);
+        array_pop($dir);
 
-        if (!is_dir($dir)) {
+        if (!is_dir(implode('/', $dir))) {
             mkdir($dir, 0744, true);
         }
+        file_put_contents($this->pathfile, json_encode(array_values($privileges)));
 
-        return file_put_contents($this->pathfile, json_encode($privileges));
+        return true;
     }
 
     private static function defaultPathfile()
